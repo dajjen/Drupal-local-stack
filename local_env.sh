@@ -24,7 +24,7 @@ if [ -d $SITE_FOLDER_NAME  ]; then
 fi
 
 
-# Fetching core using composer ofcourse.
+# Fetching core using composer of course.
 echo "Fetching Drupal 8 core to $SITE_FOLDER_NAME"
 composer create-project drupal-composer/drupal-project:8.x-dev $SITE_FOLDER_NAME --stability dev --no-interaction
 
@@ -36,7 +36,7 @@ if [ -d $SITE_FOLDER_NAME ]; then
 	if [ -d web ]; then
 		cd web
 		echo "Installing Drupal8..."
-		drush si --account-name="admin" --account-pass="admin" --site-name="$SITE_NAME" --db-url="mysql://root:password@localhost/$SITE_FOLDER_NAME" --notify -y
+		drush si --account-name="admin" --account-pass="admin" --site-name="$SITE_NAME" --db-url="mysql://root:password@localhost/$SITE_FOLDER_NAME" --locale=en --notify -y
 		cd ..
 	fi
 	cd ..
@@ -80,7 +80,6 @@ addnginxvhost() {
 	# Edit the new virtualhostfile.
 	sudo $SED -i "s/DOMAIN/$HOST_NAME/g" $CONFIG
 	sudo $SED -i "s/WEB_DIR/$DRUPAL_WEB_FOLDER/g" $CONFIG
-	sudo $SED -i "s/SITE_NAME/$SITE_FOLDER_NAME/g" $CONFIG
 
 	# create symlink to enable site
 	sudo ln -s $CONFIG $NGINX_SITES_ENABLED/$HOST_NAME
